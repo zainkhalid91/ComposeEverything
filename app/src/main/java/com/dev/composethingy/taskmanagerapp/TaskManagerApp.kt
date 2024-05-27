@@ -1,4 +1,6 @@
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -9,22 +11,25 @@ import com.dev.composethingy.taskmanagerapp.viewmodel.TaskViewModel
 
 @Composable
 fun TaskManagerApp(viewModel: TaskViewModel) {
+    val allTasks by viewModel.allTasks.collectAsState(initial = emptyList())
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "taskList") {
         composable("taskList") {
             TaskListScreen(
-                viewModel = viewModel,
+                tasks = allTasks,
                 onAddTask = { navController.navigate("taskEdit/-1") },
-                onEditTask = { taskId -> navController.navigate("taskEdit/$taskId") }
+                onEditTask = { taskId -> navController.navigate("taskEdit/$taskId") },
+                onDeleteTask = { task -> viewModel.deleteTask(task) }
+
             )
         }
         composable(
             route = "taskEdit/{taskId}",
             arguments = listOf(navArgument("taskId") { defaultValue = -1 })
         ) { backStackEntry ->
-            val taskId = backStackEntry.arguments?.getInt("taskId")
-            val task = if (taskId != -1) viewModel.tasks.find { it.id == taskId } else null
+            val taskId = backStackEntry.arguments?.getInt("taskId") ?: -1
+            val task = allTasks.find { it.id == taskId }
             TaskEditScreen(
                 task = task,
                 onSave = { title, description ->

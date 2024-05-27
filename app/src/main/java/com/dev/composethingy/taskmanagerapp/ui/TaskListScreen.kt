@@ -18,14 +18,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dev.composethingy.taskmanagerapp.models.Task
-import com.dev.composethingy.taskmanagerapp.viewmodel.TaskViewModel
+import com.dev.composethingy.taskmanagerapp.roomdb.TaskEntity
 
 @Composable
 fun TaskListScreen(
-    viewModel: TaskViewModel,
+    tasks: List<TaskEntity>,
     onAddTask: () -> Unit,
-    onEditTask: (Int) -> Unit
+    onEditTask: (Int) -> Unit,
+    onDeleteTask: (TaskEntity) -> Unit
 ) {
     Column {
         Button(onClick = onAddTask,
@@ -34,15 +34,18 @@ fun TaskListScreen(
         }
 
         LazyColumn {
-            items(viewModel.tasks) { task ->
-                TaskItem(task = task, onEditTask = { onEditTask(task.id) }, onDeleteTask = { viewModel.deleteTask(task.id) })
+            items(tasks) { task ->
+                TaskItem(
+                    task = task,
+                    onEditTask = { onEditTask(task.id) },
+                    onDeleteTask = { onDeleteTask(task) })
             }
         }
     }
 }
 
 @Composable
-fun TaskItem(task: Task, onEditTask: () -> Unit, onDeleteTask:  () -> Unit){
+fun TaskItem(task: TaskEntity, onEditTask: () -> Unit, onDeleteTask: () -> Unit) {
     Row (
          modifier = Modifier
              .fillMaxWidth()

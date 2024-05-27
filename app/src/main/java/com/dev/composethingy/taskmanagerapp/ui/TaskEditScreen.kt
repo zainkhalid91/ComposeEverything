@@ -15,11 +15,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dev.composethingy.taskmanagerapp.models.Task
+import com.dev.composethingy.taskmanagerapp.roomdb.TaskEntity
 
 @Composable
 fun TaskEditScreen(
-    task: Task?, onSave: (String, String) -> Unit, onCancel: () -> Unit
+    task: TaskEntity?, onSave: (String, String) -> Unit, onCancel: () -> Unit
 ) {
     var title by remember {
         mutableStateOf(task?.title ?: "")
