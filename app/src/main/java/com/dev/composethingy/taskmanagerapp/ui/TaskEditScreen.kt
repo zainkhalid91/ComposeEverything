@@ -19,7 +19,8 @@ import com.dev.composethingy.taskmanagerapp.roomdb.TaskEntity
 
 @Composable
 fun TaskEditScreen(
-    task: TaskEntity?, onSave: (String, String) -> Unit, onCancel: () -> Unit
+    task: TaskEntity?,
+    onSave: (String, String) -> Unit, onCancel: () -> Unit
 ) {
     var title by remember {
         mutableStateOf(task?.title ?: "")

@@ -10,6 +10,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -35,6 +36,18 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Color(0xFF1C1B1F),
     onSurface = Color(0xFF1C1B1F),
     */
+)
+
+private val DarkColorPalette = darkColorScheme(
+    primary = Color(0xFFBB86FC),
+    secondary = Color(0xFF3700B3),
+    tertiary = Color(0xFF03DAC5)
+)
+
+private val LightColorPalette = lightColorScheme(
+    primary = Color(0xFF6200EE),
+    secondary = Color(0xFF3700B3),
+    tertiary = Color(0xFF03DAC5)
 )
 
 @Composable
@@ -64,7 +77,17 @@ fun ComposeThingyTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = typography,
         content = content
     )
+
+    @Composable
+    fun ComposeEverythingTheme(content: @Composable () -> Unit) {
+        MaterialTheme(
+            colorScheme = if (isSystemInDarkTheme()) DarkColorPalette else LightColorPalette,
+            content = content
+        )
+    }
+
+
 }
