@@ -38,6 +38,7 @@ import com.dev.composethingy.R
 
 val montserratFontFamily = FontFamily(
     Font(R.font.montserrat_regular, FontWeight.Normal),
+    Font(R.font.montserrat_medium, FontWeight.Medium),
     Font(R.font.montserrat_bold, FontWeight.Bold)
 )
 
@@ -49,7 +50,7 @@ val typography = Typography(
     ),
     bodyMedium = TextStyle(
         fontFamily = montserratFontFamily,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Medium,
         fontSize = 24.sp
     ),
     bodySmall = TextStyle(

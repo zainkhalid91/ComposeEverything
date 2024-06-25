@@ -20,6 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ComposeThingyTheme {
 
+//                NavGraph("dashboard", applicationContext)
                 NavGraph("main", applicationContext)
             }
         }

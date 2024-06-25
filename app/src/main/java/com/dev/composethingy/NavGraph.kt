@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.dev.composethingy.musicapp.ui.DashBoardScreen
 import com.dev.composethingy.musicapp.ui.WelcomeScreen
 import com.dev.composethingy.taskmanagerapp.ui.Notes
 
@@ -14,6 +15,7 @@ fun NavGraph(startDestination: String = "main", context: Context) {
     NavHost(navController = navController, startDestination = startDestination) {
         composable("main") { MainScreen(navController) }
         composable("notes") { Notes(context = context) }
-        composable("music") { WelcomeScreen(onGetStartedClick = {}) }
+        composable("music") { WelcomeScreen(onGetStartedClick = { navController.navigate("dashboard") }) }
+        composable("dashboard") { DashBoardScreen(navController) }
     }
 }

@@ -101,6 +101,4 @@ fun WelcomeScreenPreview() {
     ComposeThingyTheme {
         WelcomeScreen(onGetStartedClick = {})
     }
-
-
 }
